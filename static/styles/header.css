@@ -12,9 +12,11 @@ header li {
   padding-left: 8px;
   padding-right: 8px;
 }
-
+.topBar::placeholder {
+  color: red;
+}
 .topBar{
-  background-color: #faf9f7;
+  background-color: rgb(228, 127, 127);
   display:flex;
   justify-content: space-between;
   align-items:center;
@@ -31,6 +33,10 @@ header li {
   border: none;
   border-radius: 5px;
   margin-left: 10px;
+  padding-left: 1cm;
+  padding-right: 1cm;
+  background-color: white;
+  color: red;
 }
 
 .mainDiv {
@@ -64,7 +70,7 @@ body {
   display: grid;
   grid-template-rows: auto 1fr auto;
   font-size: 14px;
-  background-color: #f4f4f4;
+  background-color: white;
   align-items: start;
   min-height: 100vh;
 }
@@ -73,8 +79,8 @@ body {
   display: flex;
   flex-flow: row wrap;
   padding: 30px 30px 20px 30px;
-  color: #2f2f2f;
-  background-color: #fff;
+  color: white; 
+  background-color: rgb(214, 127, 127);
   border-top: 1px solid #e5e5e5;
 }
 
@@ -107,7 +113,7 @@ body {
 
 .footer address {
   font-style: normal;
-  color: #999;
+  color: white;
 }
 
 .footer__btn {
@@ -118,7 +124,7 @@ body {
   max-width: max-content;
   background-color: rgb(33, 33, 33, 0.07);
   border-radius: 100px;
-  color: #2f2f2f;
+  color: white;
   line-height: 0;
   margin: 0.6em 0;
   font-size: 1rem;
@@ -149,7 +155,7 @@ body {
 }
 
 .nav__ul a {
-  color: #999;
+  color: white;
 }
 
 .nav__ul--extra {
