@@ -10,6 +10,13 @@
     .boat {
         min-width: 200px;
         padding: 10px;
+        border: 1px solid salmon;
+        background-color: red;
+        border-radius: .5cm;
+        margin-top: 1cm;
+        margin-left: 1cm;
+        color: white;
+        padding: .5cm;
     }
 
     .pagination_bar {
@@ -38,11 +45,23 @@
         padding-top: 20px;
         align-items: center;
     }
+    .searchbar {
+        justify-content: center;
+        margin: 0 auto;
+        margin-top: 1cm;
+    }
+    .searchbar input {
+        width: 5cm;
+        height: 1cm;
+    }
 </style>
 
 {% extends "base.html" %}
 {% block body %}
     {% set prev_page = page - 1 %}  <!-- variables in jinja --->
+    <div class="searchbar">
+        <input type="text" placeholder="Search">
+    </div>
     <div class="column">
         <h3>Page {{ page }}</h3>
 
