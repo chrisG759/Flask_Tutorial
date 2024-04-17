@@ -50,12 +50,12 @@
             {% for boat in boats %}
                 <div class="boat">
                     <ul>
-                        <li>Boat id: {{ boat['id'] }}</li>
+                        <li>Boat id: {{ boat[0] }}</li>
                         <ul>
-                            <li>Name: {{ boat['name'] }}</li>
-                            <li>Type: {{ boat['type'] }}</li>
-                            <li>Owner ID: {{ boat['owner_id'] }}</li>
-                            <li>Price: {{ boat['rental_price'] }}</li>
+                            <li>Name: {{ boat[1] }}</li>
+                            <li>Type: {{ boat[2] }}</li>
+                            <li>Owner ID: {{ boat[3] }}</li>
+                            <li>Price: {{ boat[4] }}</li>
                         </ul>
                     </ul>
                 </div>

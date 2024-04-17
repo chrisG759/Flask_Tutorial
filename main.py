@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-from sqlalchemy import Column, Integer, String, Numeric, create_engine, text
+from sqlalchemy import create_engine, text
 
 app = Flask(__name__)
 conn_str = "mysql://root:sister@localhost/boatdb"
@@ -27,7 +27,7 @@ def get_boats(page=1):
     page = int(page)  # request params always come as strings. So type conversion is necessary.
     per_page = 10  # records to show per page
     boats = conn.execute(text(f"SELECT * FROM boats LIMIT {per_page} OFFSET {(page - 1) * per_page}")).all()
-    print(boats)
+    
     return render_template('boats.html', boats=boats, page=page, per_page=per_page)
 
 
