@@ -18,6 +18,17 @@ def index():
 def user(name):
     return render_template('user.html', name=name)
 
+# # search function
+# @app.route('/search', methods=['GET'])
+# def search():
+#     db = get_db()
+#     qTerm = request.args.get('s')
+#     if not qTerm:
+#         flash('You did not search for anything')
+#         return redirect(url_for('home'))
+#     elif qTerm:
+#         cleanQuery = escape(qTerm)
+#         dbQuery = db.execute('select * from boats where ')
 
 # get all boats
 # this is done to handle requests for two routes -
