@@ -3,31 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Boat Search</title>
+    <title>Search Results</title>
     <link rel="stylesheet" href="../static/styles/search.css">
+    <style>
+        .hidden {
+            display: none;
+        }
+    </style>
 </head>
 <body>
-    <div id="header">
-        <h1>Search For a Boat</h1>
-    </div>
-    <div id="search_bar">
-        <form action="/search" method="POST">
-            <input type="text" name="boat_id" placeholder="Boat ID#">
+    <div class="search">
+        <h1>Search Results</h1>
+        <form action="/search" method="post">
+            <label for="boat_id">Boat ID:</label>
+            <input type="text" id="boat_id" name="boat_id">
             <button type="submit">Search</button>
         </form>
-    </div>
-    <div id="boat_info">
-        {% if boat_id %}
-            <p>Boat ID: {{ boat_id }}</p>
-            {% if boat_name %}
-                <p>Boat Name: {{ boat_name }}</p>
+        <div id="boat_display">
+            {% if boat %}
+                <p>Boat ID: {{ boat.id }}</p>
+                <p>Name: {{ boat.name }}</p>
+                <p>Type: {{ boat.type }}</p>
+                <p>Owner ID: {{ boat['owner_id'] }}</p>
+                <p>Price: {{ boat['price'] }}</p>
+                <!-- Add update button -->
+                <button id="updateBtn" onclick="toggleInputs()">Update</button>
+                <!-- Add input fields (hidden by default) -->
+                <form id="updateForm" action="/update/{{ boat.id }}" method="post" class="hidden">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" value="{{ boat.name }}"><br>
+                    <label for="type">Type:</label>
+                    <input type="text" id="type" name="type" value="{{ boat.type }}"><br>
+                    <label for="owner_id">Owner ID:</label>
+                    <input type="text" id="owner_id" name="owner_id" value="{{ boat.owner_id }}"><br>
+                    <label for="price">Price:</label>
+                    <input type="text" id="price" name="price" value="{{ boat.price }}"><br>
+                    <button type="submit">Save</button>
+                </form>
+                <!-- Add delete button -->
+                <form action="/delete/{{ boat.id }}" method="post">
+                    <button type="submit">Delete</button>
+                </form>
             {% else %}
-                <p>Boat Name: Not found</p>
+                <p>{{ error }}</p>
             {% endif %}
-        {% endif %}
-        {% if error %}
-            <p>{{ error }}</p>
-        {% endif %}
+        </div>
     </div>
+    <script>
+        function toggleInputs() {
+            var updateForm = document.getElementById('updateForm');
+            updateForm.classList.toggle('hidden');
+        }
+    </script>
 </body>
 </html>

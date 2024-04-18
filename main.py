@@ -1,5 +1,5 @@
-from flask import Flask, render_template, request
-from sqlalchemy import create_engine, text, MetaData, Table, Column, Integer, String
+from flask import Flask, render_template, request, redirect, url_for
+from sqlalchemy import create_engine, text, MetaData, Table, Column, Integer, String, Float
 from sqlalchemy.orm import sessionmaker
 
 app = Flask(__name__)
@@ -10,9 +10,46 @@ engine = create_engine(conn_str, echo=True)
 metadata = MetaData()
 boats = Table('boats', metadata,
     Column('id', Integer, primary_key=True),
-    Column('name', String(50)),
-    # Define other columns as needed
+    Column('name', String),
+    Column('type', String(20)),
+    Column('21', Integer),
+    Column('111_136', Float)
 )
+
+# Handle boat deletion
+@app.route('/delete/<int:boat_id>', methods=['POST'])
+def delete_boat(boat_id):
+    try:
+        conn = engine.connect()
+        conn.execute(
+            text("DELETE FROM boats WHERE id = :id"),
+            {'id': boat_id}
+        )
+        conn.close()
+        return redirect(url_for('index'))
+    except Exception as e:
+        error = e.orig.args[1]
+        return render_template('search.html', error=error, success=None)
+
+# Handle boat update
+@app.route('/update/<int:boat_id>', methods=['POST'])
+def update_boat(boat_id):
+    try:
+        name = request.form['name']
+        type = request.form['type']
+        owner_id = request.form['owner_id']
+        price = request.form['price']
+
+        conn = engine.connect()
+        conn.execute(
+            text("UPDATE boats SET name=:name, type=:type, 21=:owner_id, 111_136=:price WHERE id=:id"),
+            {'name': name, 'type': type, 'owner_id': owner_id, 'price': price, 'id': boat_id}
+        )
+        conn.close()
+        return redirect(url_for('index'))
+    except Exception as e:
+        error = e.orig.args[1]
+        return render_template('search.html', error=error, success=None)
 
 # Create a session
 Session = sessionmaker(bind=engine)
@@ -22,7 +59,7 @@ Session = sessionmaker(bind=engine)
 def index():
     return render_template('index.html')
 
-# Render user.html with name parameter
+# Render user.html
 @app.route('/user/<name>')
 def user(name):
     return render_template('user.html', name=name)
@@ -38,9 +75,10 @@ def search():
         conn.close()
 
         if boat:
-            boat_name = boat[1]  # Assuming the 'name' column is the second column in the query result
-            return render_template('search.html', boat_id=boat_id, boat_name=boat_name)
+            print("Boat found:", boat)  # Print debug information
+            return render_template('search.html', boat=boat)  # Pass the boat object to the template
         else:
+            print("Boat not found for ID:", boat_id)  # Print debug information
             return render_template('search.html', error="Boat ID not found")
 
     return render_template('search.html')
