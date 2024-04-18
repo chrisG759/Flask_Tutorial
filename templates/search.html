@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boat Search</title>
+    <link rel="stylesheet" href="../static/styles/search.css">
+</head>
+<body>
+    <div id="header">
+        <h1>Search For a Boat</h1>
+    </div>
+    <div id="search_bar">
+        <form action="/search" method="POST">
+            <input type="text" name="boat_id" placeholder="Boat ID#">
+            <button type="submit">Search</button>
+        </form>
+    </div>
+    <div id="boat_info">
+        {% if boat_id %}
+            <p>Boat ID: {{ boat_id }}</p>
+            {% if boat_name %}
+                <p>Boat Name: {{ boat_name }}</p>
+            {% else %}
+                <p>Boat Name: Not found</p>
+            {% endif %}
+        {% endif %}
+        {% if error %}
+            <p>{{ error }}</p>
+        {% endif %}
+    </div>
+</body>
+</html>
