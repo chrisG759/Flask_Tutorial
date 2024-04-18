@@ -5,6 +5,7 @@
         flex-wrap: wrap;
         width: 1140px;
         margin: auto;
+        flex-direction: column;
     }
 
     .boat {
@@ -54,6 +55,9 @@
         width: 5cm;
         height: 1cm;
     }
+    a {
+        text-align: center;
+    }
 </style>
 
 {% extends "base.html" %}
@@ -78,8 +82,8 @@
                         </ul>
                     </ul>
                 </div>
+                <a href="{{ url_for('boat_details', boat_id=boat[0]) }}">View Details</a> <!-- Link to boat details -->
             {% endfor %}
-
             {% if boats | length < 1 %}
                 <h1>No data available</h1>
             {% endif %}

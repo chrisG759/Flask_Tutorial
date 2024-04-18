@@ -15,6 +15,17 @@ boats = Table('boats', metadata,
     Column('21', Integer),
     Column('111_136', Float)
 )
+# Handle requests to view boat details
+@app.route('/boat/<int:boat_id>')
+def boat_details(boat_id):
+    conn = engine.connect()
+    boat = conn.execute(text("SELECT * FROM boats WHERE id = :id"), {'id': boat_id}).fetchone()
+    conn.close()
+
+    if boat:
+        return render_template('boat_details.html', boat=boat)
+    else:
+        return "Boat not found", 404
 
 # Handle boat deletion
 @app.route('/delete/<int:boat_id>', methods=['POST'])

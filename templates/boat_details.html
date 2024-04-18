@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boat Details</title>
+    <style>
+        body {
+            text-align: center;
+            color: white;
+        }
+        li {
+            list-style-type: none;
+            margin-right: 1cm;
+        }
+        html {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+#search_bar {
+    text-align: center;
+}
+#header {
+    text-align: center;
+    
+}
+body {
+    background-color: darksalmon;
+}
+.search {
+    text-align: center;
+}
+#boat_display {
+    margin-top: 2cm;
+    border: 1px solid red;
+    display: inline-block;
+    padding-left: 1cm;
+    padding-right: 1cm;
+    background-color: chocolate;
+    color: white;
+    border-radius: 1cm;
+    padding-bottom: 1cm;
+}
+button {
+    height: .75cm;
+    width: 3cm;
+    background-color: white;
+    border: 0;
+    border-radius: 1cm;
+    color: red;
+    margin-top: 1cm;
+}
+button:hover {
+    cursor: pointer;
+}
+input {
+    height: .75cm;
+    border: 0;
+    border-radius: .3cm;
+}
+label {
+    color: red;
+    
+}
+    </style>
+</head>
+<body>
+    <h1>Boat Details</h1>
+    <ul>
+        <li>Boat id: {{ boat[0] }}</li>
+        <li>Name: {{ boat[1] }}</li>
+        <li>Type: {{ boat[2] }}</li>
+        <li>Owner ID: {{ boat[3] }}</li>
+        <li>Price: {{ boat[4] }}</li>
+    </ul>
+    <a href="{{ url_for('get_boats') }}">Back to Boat List</a>
+</body>
+</html>
